@@ -3,6 +3,7 @@
   "beam_density":0.0,
   "beam_update_prob":1.0,
   "cnn_maxout_pieces":3,
+  "nr_feature_tokens":6,
   "nr_class":74,
   "hidden_depth":1,
   "token_vector_width":96,
