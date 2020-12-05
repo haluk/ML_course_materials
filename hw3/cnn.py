@@ -8,6 +8,7 @@ from sklearn.model_selection import StratifiedKFold, cross_val_score
 from tensorflow.keras import datasets, layers, models
 from tensorflow.keras.wrappers.scikit_learn import KerasClassifier
 
+plt.style.use("ggplot")
 
 (train_images, train_labels), (test_images, test_labels) = datasets.cifar10.load_data()
 
@@ -75,6 +76,8 @@ plt.xlabel("Epoch")
 plt.ylabel("Accuracy")
 plt.ylim([0.5, 1])
 plt.legend(loc="lower right")
+plt.savefig("sample_images.png")
+plt.clf()
 
 test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=2)
 
@@ -90,7 +93,9 @@ conf_mat[4]
 conf_mat = conf_mat.astype("float") / conf_mat.sum(axis=1)[:, np.newaxis]
 
 
-def plot_confusion_matrix(cm, classes, title="Confusion matrix", cmap=plt.cm.Blues):
+def plot_confusion_matrix(
+    cm, classes, fname, title="Confusion matrix", cmap=plt.cm.Blues
+):
     """
     Plots the confusion matrix.
     """
@@ -117,10 +122,12 @@ def plot_confusion_matrix(cm, classes, title="Confusion matrix", cmap=plt.cm.Blu
     plt.ylabel("True label")
     plt.xlabel("Predicted label")
     plt.tight_layout()
+    plt.savefig(fname)
 
 
 plt.figure(figsize=(20, 7))
-plot_confusion_matrix(conf_mat, classes=class_names)
+plot_confusion_matrix(conf_mat, class_names, "confusion_matrix.png")
+plt.clf()
 
 
 def create_model(
