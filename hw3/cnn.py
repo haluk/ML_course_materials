@@ -41,8 +41,8 @@ for i in range(10):
     # The CIFAR labels happen to be arrays,
     # which is why you need the extra index
     plt.xlabel(class_names[train_labels[i][0]])
-plt.show()
-
+plt.savefig("sample_images.png")
+plt.clf()
 
 model = models.Sequential()
 model.add(layers.Conv2D(32, (3, 3), activation="relu", input_shape=image_shape))
@@ -76,7 +76,7 @@ plt.xlabel("Epoch")
 plt.ylabel("Accuracy")
 plt.ylim([0.5, 1])
 plt.legend(loc="lower right")
-plt.savefig("sample_images.png")
+plt.savefig("train_val_acc.png")
 plt.clf()
 
 test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=2)
